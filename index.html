@@ -94,6 +94,14 @@
       50%{opacity:1;}
       100%{transform:translateY(-100vh) scale(1);opacity:0;}
     }
+    /* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
   </style>
 </head>
 <body class="antialiased bg-white text-gray-900">
@@ -283,33 +291,54 @@
                 </div>
               </section>
 
+                            {/* CLIENT TESTIMONIALS - HORIZONTAL SCROLL */}
               <section className="py-20 bg-gradient-to-br from-gray-50 via-green-50 to-emerald-50 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute bottom-10 left-20 w-96 h-96 bg-green-400 rounded-full blur-3xl float"></div>
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-                  <h3 className="text-4xl font-bold text-center bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-16 fade-in">What Our Clients Say</h3>
-                  <div className="grid md:grid-cols-3 gap-8">
-                    {[
-                      {name:"Ravi Sharma",role:"IT Head, TCS",quote:"Greylon made our e-waste compliance effortless. Full documentation and EPR credits delivered on time.",rating:5,avatar:"RS"},
-                      {name:"Priya Mehta",role:"Procurement, Infosys",quote:"Best rates for refurbished laptops. Saved 40% vs new, with 90-day warranty. Highly recommend!",rating:5,avatar:"PM"},
-                      {name:"Amit Patel",role:"Sustainability Lead, Wipro",quote:"Pan-India pickup and CPCB compliance in one go. Finally, a partner we can trust.",rating:5,avatar:"AP"}
-                    ].map((t,i)=>
-                      <div key={i} className="bg-white p-8 rounded-3xl shadow-xl card-hover glow-border" style={{animationDelay:i*0.2+'s'}}>
-                        <div className="flex items-center gap-4 mb-6">
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white text-xl font-bold">
-                            {t.avatar}
+                  <h3 className="text-4xl font-bold text-center bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-12 fade-in">
+                    What Our Clients Say
+                  </h3>
+
+                  {/* HORIZONTALaf Scroll Container */}
+                  <div className="overflow-x-auto scrollbar-hide">
+                    <div className="flex gap-8 px-4 pb-4 snap-x snap-mandatory">
+                      {[
+                        {name:"Ravi Sharma",role:"IT Head, TCS",quote:"Greylon made our e-waste compliance effortless. Full documentation and EPR credits delivered on time.",rating:5,avatar:"RS"},
+                        {name:"Priya Mehta",role:"Procurement, Infosys",quote:"Best rates for refurbished laptops. Saved 40% vs new, with 90-day warranty. Highly recommend!",rating:5,avatar:"PM"},
+                        {name:"Amit Patel",role:"Sustainability Lead, Wipro",quote:"Pan-India pickup and CPCB compliance in one go. Finally, a partner we can trust.",rating:5,avatar:"AP"},
+                        {name:"Neha Kapoor",role:"CTO, Tech Mahindra",quote:"Secure data destruction and certified recycling. Greylon is our go-to for ITAD.",rating:5,avatar:"NK"},
+                        {name:"Vikram Singh",role:"Operations Head, HCL",quote:"Smooth process from pickup to certification. Highly professional team.",rating:5,avatar:"VS"}
+                      ].map((t,i)=>
+                        <div
+                          key={i}
+                          className="min-w-[320px] max-w-[360px] bg-white p-8 rounded-3xl shadow-xl card-hover glow-border snap-center"
+                          style={{animationDelay: i*0.1 + 's'}}
+                        >
+                          <div className="flex items-center gap-4 mb-6">
+                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white text-xl font-bold">
+                              {t.avatar}
+                            </div>
+                            <div>
+                              <p className="font-bold text-gray-900 text-lg">{t.name}</p>
+                              <p className="text-sm text-gray-600">{t.role}</p>
+                            </div>
                           </div>
-                          <div>
-                            <p className="font-bold text-gray-900 text-lg">{t.name}</p>
-                            <p className="text-sm text-gray-600">{t.role}</p>
+                          <div className="flex mb-4">
+                            {[...Array(t.rating)].map((_,j)=><i key={j} data-lucide="star" className="w-5 h-5 text-yellow-500 fill-current"></i>)}
                           </div>
+                          <p className="text-gray-700 italic leading-relaxed">"{t.quote}"</p>
                         </div>
-                        <div className="flex mb-4">
-                          {[...Array(t.rating)].map((_,j)=><i key={j} data-lucide="star" className="w-5 h-5 text-yellow-500 fill-current"></i>)}
-                        </div>
-                        <p className="text-gray-700 italic leading-relaxed">"{t.quote}"</p>
-                      </div>)}
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Optional: Scroll Indicator */}
+                  <div className="flex justify-center mt-6 gap-2">
+                    {[0,1,2,3,4].map((_,i)=>(
+                      <div key={i} className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                    ))}
                   </div>
                 </div>
               </section>
